@@ -1,1 +1,1 @@
-bundle exec ruby my_app.rb
+rackup config.ru -p 5000

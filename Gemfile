@@ -1,8 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'sinatra'
-gem 'passenger'
-
-group :development do
-	gem 'sinatra-contrib'
-end
+gem "sinatra"
+gem "sinatra-contrib"
+gem "sinatra-rocketio"
+gem "thin"
