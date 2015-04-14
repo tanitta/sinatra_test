@@ -10,16 +10,19 @@ document.addEventListener('mouseup', up);
 var is_down = false;
 var pos_x = 0;
 var pos_y = 0;
-context.lineWidth = 4;
+
+io.push("init", "");
+onload=function(){
+	var img = new Image();
+	img.src = "test.png";
+	context.drawImage(img,10,10);
+}
 function down(){
-	context.moveTo(pos_x, pos_y);
 	is_down = true;
 }
 function test(e) {
 	canvasRect = canvas.getBoundingClientRect();
 	if(is_down){
-		context.lineTo(e.clientX-canvasRect.left, e.clientY-canvasRect.top);
-		context.stroke();
 		io.push("hello", pos_x+","+pos_y+","+(e.clientX-canvasRect.left)+","+(e.clientY-canvasRect.top));
 	}
 	pos_x = e.clientX-canvasRect.left;
@@ -31,3 +34,16 @@ function up(){
 }
 
 
+
+function draw(x1,y1,x2,y2,width,color){
+	context.lineWidth = width;
+	context.strokeStyle = color;
+	context.moveTo(x1, y1);
+	context.lineTo(x2, y2);
+	context.stroke();
+}
+
+io.on("echo", function(message){
+   p = message.split(",");
+   draw(parseFloat(p[0]),parseFloat(p[1]),parseFloat(p[2]),parseFloat(p[3]),1,"#000000");
+});
