@@ -21,7 +21,9 @@ onload=function(){
 	img.src = "test.png";
 	img.onload = function() {
 		// context.drawImage(img, 0, 0);
+		console.log("init...");
 		io.push("init", "");
+		console.log("initialized");
 	}
 }
 function down(){
@@ -63,11 +65,13 @@ io.on("request_image", function(message){
 });
 
 io.on("requested_image", function(message){
+	console.log("start load log");
 	var requested_img = new Image();
-	console.log(message.message);
+	// console.log(message.message);
 	
 	requested_img.src = message.message;
 	requested_img.onload = function() {
+		console.log("loaded log");
 		context.drawImage(requested_img, 0, 0);
 	}
 });
